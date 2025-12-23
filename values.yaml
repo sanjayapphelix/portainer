@@ -24,3 +24,6 @@ ingress:
         - /
   tls: []
 
+httpRoute:
+  enabled: true   # or false depending on what you want
+
