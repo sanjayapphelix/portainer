@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "node-exporter.name" -}}
+{{- define "portainer.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "node-exporter.fullname" -}}
+{{- define "portainer.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "node-exporter.chart" -}}
+{{- define "portainer.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "node-exporter.labels" -}}
-helm.sh/chart: {{ include "node-exporter.chart" . }}
-{{ include "node-exporter.selectorLabels" . }}
+{{- define "portainer.labels" -}}
+helm.sh/chart: {{ include "portainer.chart" . }}
+{{ include "portainer.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "node-exporter.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "node-exporter.name" . }}
+{{- define "portainer.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "portainer.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "node-exporter.serviceAccountName" -}}
+{{- define "portainer.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "node-exporter.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "portainer.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

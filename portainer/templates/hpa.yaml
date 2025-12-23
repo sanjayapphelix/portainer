@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "node-exporter.fullname" . }}
+  name: {{ include "portainer.fullname" . }}
   labels:
-    {{- include "node-exporter.labels" . | nindent 4 }}
+    {{- include "portainer.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "node-exporter.fullname" . }}
+    name: {{ include "portainer.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
